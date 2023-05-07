@@ -10,6 +10,13 @@ export default function App() {
     setTaskItems([...taskItems, task]);
     setTask('');
   }
+
+  const completeTask = (index) => {
+    let itemsCopy = [...taskItems];
+    itemsCopy.splice(index, 1);
+    setTaskItems(itemsCopy);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.tasksWrapper}>
@@ -18,7 +25,7 @@ export default function App() {
           {
             taskItems.map((item, index) => {
               return (
-                <TouchableOpacity key={index}>
+                <TouchableOpacity key={index} onPress={() => completeTask(index)}>
                   <Task text={item} />
                 </TouchableOpacity>
               )
@@ -56,8 +63,8 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   writeTaskWrapper: {
-    postition: 'absolute',
-    bottom: '60',
+    position: 'absolute',
+    bottom: 60,
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -70,6 +77,7 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     borderColor: '#c0c0c0',
     borderWidth: 1,
+    width: 250,
   },
   addWrapper: {
     width: 60,
